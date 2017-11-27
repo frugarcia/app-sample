@@ -1,7 +1,12 @@
 import * as types from '../../constants/actionTypes';
 
 const initialState = {
-  data: [],
+  data: [
+    {gender: "male", completeName: "Gerardo Longoria Godínez", email: "geralongor@gmail.com"},
+    {gender: "female", completeName: "Blanca Pelayo Saucedo", email: "blanpelayo@hotmail.com"},
+    {gender: "male", completeName: "Agustín Samaniego Bahena", email: "agussamani@gmail.com"},
+    {gender: "female", completeName: "Francisca Vaca Verdugo", email: "franvaca@hotmail.com"},
+  ],
   message: {}
 }
 

@@ -2,8 +2,8 @@
 import withRedux from 'next-redux-wrapper';
 import { initStore } from '../store.js';
 import { bindActionCreators } from 'redux';
-import { countrySearch, resetSearch } from '../components/Countries/actions';
-import { Divider, Button, Input, Dimmer, Loader, Message } from 'semantic-ui-react';
+import { loadAllCountries, resetSearch, filterCountries } from '../components/Countries/actions';
+import { Search, Divider, Button, Input, Dimmer, Loader, Message } from 'semantic-ui-react';
 
 //Components
 import Layout from '../components/Layout';
@@ -13,35 +13,43 @@ class Countries extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      searchValue: ''
+      searchValue: '',
+      isLoading: false
     }
-    this.onSearch = this.onSearch.bind(this)
+    this.onReset = this.onReset.bind(this)
     this.handleInput = this.handleInput.bind(this)
   };
 
-  handleInput(e, i){ this.setState({ searchValue: i.value }) }
+  componentDidMount() { this.props.loadAllCountries() };
 
-  onSearch(){
-    this.props.countrySearch(this.state.searchValue)
-    this.setState({ searchValue: "" })
+  handleInput(e, i) {
+    this.setState({ searchValue: i.value, isLoading: true })
+    setTimeout(() => {
+      if (this.state.searchValue.length < 1) this.onReset()
+      this.props.filterCountries(i.value)
+      this.setState({ isLoading: false })
+    }, 500)
+  };
+
+  onReset(){
+    this.setState({ searchValue: '' })
+    this.props.resetSearch();
   };
 
   render () {
-    const { countrySearch, countries, url } = this.props;
+    const { countries, url } = this.props;
     return (
       <Layout url={url}>
         <h2>Paises del mundo</h2>
-        <Input
-            type="text"
-            placeholder="Introduzca el nombre de un país ..."
-            fluid
-            action
-            onChange={this.handleInput}
-            value={this.state.searchValue}
-          >
-            <input/>
-            <Button onClick={ this.onSearch } type='submit'>Buscar</Button>
-          </Input>
+        <Search
+          placeholder='Introduzca el nombre de un país en cualquier idioma'
+          input={{ fluid: true }}
+          style={{ width: '100%' }}
+          loading={this.state.isLoading}
+          onSearchChange={this.handleInput}
+          value={this.state.searchValue}
+          showNoResults={false}
+        />
           {
             countries.isLoading ?
             <Dimmer active inverted>
@@ -52,22 +60,23 @@ class Countries extends React.Component {
               negative={ countries.statusResponse === "EMPTY" || countries.statusResponse === "ERROR" }
               size="small"
               content={
-                countries.statusResponse === "OK" ? `Se han encontrado ${countries.response.length} resultados de su búsqueda.` :
+                countries.statusResponse === "OK" ? `Se han encontrado ${countries.filterData.length} resultados de su búsqueda.` :
                 countries.statusResponse === "EMPTY" ? `Su búsqueda no ha encontrado ningún resultado` :
                 'Se produjo un error al realizar la búsqueda, inténtelo de nuevo'
               }
             /> : null
           }
         <Divider horizontal>Resultados</Divider>
-        <ListCountries url={url} countries={countries.response}/>
+        <ListCountries url={url} countries={countries.filterData}/>
       </Layout>
     )
   }
 };
 
 const mapDispatchToProps = dispatch => ({
-  countrySearch: bindActionCreators(countrySearch, dispatch),
-  resetSearch: bindActionCreators(resetSearch, dispatch)
+  loadAllCountries: bindActionCreators(loadAllCountries, dispatch),
+  resetSearch: bindActionCreators(resetSearch, dispatch),
+  filterCountries: bindActionCreators(filterCountries, dispatch)
 });
 
 const mapStateToProps = state => state;

@@ -2,7 +2,7 @@ import * as types from '../../constants/actionTypes';
 
 const initialState = {
   asyncStart: false,
-  result: 0
+  result: 8
 };
 
 export default (state = initialState, action) => {
@@ -16,7 +16,7 @@ export default (state = initialState, action) => {
     case types.TIMER_PAUSE:
       return Object.assign({}, state, { asyncStart: false })
     case types.TIMER_STOP:
-      return Object.assign({}, state, { result: initialState.result, asyncStart: false })
+      return Object.assign({}, state, { result: 0, asyncStart: false })
     default: return state
   }
 };

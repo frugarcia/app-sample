@@ -1,5 +1,10 @@
 import { formatNumber } from 'accounting-js';
 import { Grid, Card, Icon, Image, Button, Label } from 'semantic-ui-react'
+import LazyLoad from 'react-lazyload';
+
+function preloader() {
+  return <img src=""/>;
+}
 
 export default ({item, addToCart}) => (
   <Card key={item.id}>

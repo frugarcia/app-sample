@@ -5,11 +5,6 @@ export const REMOVE_USER = 'REMOVE_USER';
 export const CHANGE_MESSAGE = 'CHANGE_MESSAGE';
 export const CLEAR_MESSAGE = 'CLEAR_MESSAGE';
 
-//DataApi
-export const HANDLE_URL_API = 'CHANGE_URL_API';
-export const GET_DATA_API = 'GET_DATA_API';
-export const RESET_DATA_API = 'RESET_DATA_API';
-
 //Counter
 export const LAUNCH_OPERATION = 'LAUNCH_OPERATION';
 export const TIMER_START = 'TIMER_START';

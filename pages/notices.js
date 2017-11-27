@@ -22,9 +22,8 @@ const Notices = ({ url, notices }) => {
 };
 
 Notices.getInitialProps = async () => {
-  const res = await getNotices('notices')
-  const notices = await res
-  return {notices} || {}
+  const notices = await getNotices('notices')
+  return { notices } || {}
 };
 
 Notices.propTyes = {

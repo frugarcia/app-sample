@@ -29,7 +29,7 @@ const Country = ({ country }) => {
 };
 
 Country.getInitialProps = async ({ query: { alphaCode } }) => {
-  const res = await fetch(`https://restcountries.eu/rest/v2/alpha/${alphaCode}`)
+  const res = await fetch(`https://restcountries.eu/rest/v2/alpha/${'esp'}`)
   const country = await res.json()
   return { country } || {}
 }

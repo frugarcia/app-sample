@@ -8,7 +8,10 @@ export default ({ countries, url }) => {
     <Grid columns={4}>
       { countries && countries.map((item, i)=>(
         <Grid.Column textAlign="center" key={i}>
-          <Link  as={`${url.pathname}/${item.alpha3Code.toLowerCase()}`} href={`country/?alphaCode=${item.alpha3Code.toLowerCase()}`}>
+          <Link
+            as={`/countries/${item.alpha3Code.toLowerCase()}`}
+            href={`/country/?alphaCode=${item.alpha3Code.toLowerCase()}`
+          }>
             <Card style={{ height: "100%" }}>
               <Image style={{ margin: ".3em" }} src={item.flag} />
               <Card.Content>

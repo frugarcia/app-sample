@@ -1,40 +1,40 @@
 //Dependencies
 import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import { onChangeStateAuth } from './actions';
-
 import firebase from 'firebase';
-import clientCredentials from '../../credentials/client';
+import { connect } from 'react-redux';
+import { authUpdate } from './actions';
 import { Menu, Button } from 'semantic-ui-react';
+import { config } from '../../lib/googleAuth'
+
+//Components
+import AuthDetail from './AuthDetail'
 
 class Auth extends React.Component {
 
   componentDidMount() {
-    if (!firebase.apps.length) firebase.initializeApp(clientCredentials)
+    !firebase.apps.length ? firebase.initializeApp(config) : null
     firebase.auth().onAuthStateChanged(user => {
-      this.props.onChangeStateAuth(user)
-    })
-  }
+      this.props.authUpdate(user)
+    });
+  };
 
-  handleLogin () {
-    firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider())
-  }
+  handleLogin(){
+    firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
+      .then(() => firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider()))
+  };
 
-  handleLogout () {
-    firebase.auth().signOut()
-  }
+  handleLogout(){
+    firebase.auth().signOut();
+  };
 
   render(){
     const { auth } = this.props;
     return (
       <Menu.Item position="right">
         {
-          ! auth ?
+          ! auth.isAuth ?
           <Button color="blue" onClick={this.handleLogin}>Google Login</Button> :
-          <div>
-            <span style={{ display: "block", fontSize: "0.9em", paddingBottom: ".5em"}}>{auth.email}</span>
-            <Button color="youtube" fluid compact size="tiny" style={{ display: "block" }} onClick={this.handleLogout} >Logout</Button>
-          </div>
+          <AuthDetail user={auth.userData} logout={this.handleLogout}/>
         }
       </Menu.Item>
     )
@@ -45,7 +45,7 @@ const mapStateToProps = state => state;
 
 const mapDispatchToProps = dispatch => {
   return {
-    onChangeStateAuth: bindActionCreators(onChangeStateAuth, dispatch)
+    authUpdate: bindActionCreators(authUpdate, dispatch)
   }
 }
 

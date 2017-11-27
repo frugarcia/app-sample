@@ -2,7 +2,7 @@ import * as types from '../../constants/actionTypes';
 
 const initialState = {
   data: [],
-  message: null
+  message: {}
 }
 
 export default (state = initialState, action) => {
@@ -14,7 +14,7 @@ export default (state = initialState, action) => {
     case types.CHANGE_MESSAGE:
       return Object.assign({}, state, { message: action.message })
     case types.CLEAR_MESSAGE:
-      return Object.assign({}, state, { message: null })
+      return Object.assign({}, state, { message: {} })
     default: return state
   }
 };

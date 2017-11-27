@@ -1,8 +1,11 @@
 import * as types from '../../constants/actionTypes';
 
-export const onChangeStateAuth = user => dispatch => {
+export const authUpdate = user => dispatch => {
   dispatch({
-    type: types.ON_CHANGE_STATE_AUTH,
-    user
+    type: types.AUTH_UPDATE,
+    user: {
+      isAuth: user !== null,
+      userData: user
+    }
   })
 };

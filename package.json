@@ -1,33 +1,38 @@
 {
-  "name": "marvel",
+  "name": "app-sample",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "next",
-    "build": "next build",
-    "start": "NODE_ENV=production node server.js"
+    "dev": "API_KEY_FIREBASE=AIzaSyCLzpDigDuERDqkNmnD790a2eC0tZmOYW8 API_ENDPOINT_PRISMIC=https://app-sample.prismic.io/api/v2 API_TOKEN_PRISMIC=MC5XaFJfV3ljQUFLUlZYb2NP.XmDvv71w77-977-9XmLvv70677-9FO-_vVbvv73vv71afSo6ZO-_ve-_vVNUdVDvv73vv73vv73vv73vv70 node server.js",
+    "build": "next build && next export -o ./dist",
+    "clean": "rimraf dist && rimraf .next",
+    "start": "NODE_ENV=production API_KEY_FIREBASE=AIzaSyCLzpDigDuERDqkNmnD790a2eC0tZmOYW8 API_ENDPOINT_PRISMIC=https://app-sample.prismic.io/api/v2 API_TOKEN_PRISMIC=MC5XaFJfV3ljQUFLUlZYb2NP.XmDvv71w77-977-9XmLvv70677-9FO-_vVbvv73vv71afSo6ZO-_ve-_vVNUdVDvv73vv73vv73vv73vv70 node server.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "accounting-js": "^1.1.1",
-    "body-parser": "^1.18.2",
+    "contentful": "^5.0.5",
     "express": "^4.16.2",
-    "express-session": "^1.15.6",
-    "faker": "^4.1.0",
     "firebase": "^4.6.0",
-    "firebase-admin": "^5.4.3",
+    "immutable": "^4.0.0-rc.9",
     "isomorphic-fetch": "^2.2.1",
+    "marked": "^0.3.6",
     "next": "^4.1.4",
     "next-redux-wrapper": "^1.3.4",
+    "prismic-javascript": "^1.4.1",
+    "prop-types": "^15.6.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
     "semantic-ui-react": "^0.75.1",
-    "session-file-store": "^1.1.2"
+    "validator": "^9.1.1"
+  },
+  "devDependencies": {
+    "babel-plugin-transform-define": "^1.3.0"
   }
 }

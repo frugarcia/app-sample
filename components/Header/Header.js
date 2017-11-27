@@ -9,7 +9,8 @@ const navigateList = [
   {path: "/users", label: "Usuarios"},
   {path: "/counter", label: "Contador"},
   {path: "/countries", label: "Países"},
-  {path: "/shop", label: "Tienda Online"}
+  {path: "/shop", label: "Tienda Online"},
+  {path: "/notices", label: "Noticias"}
 ];
 
 export default ({ url }) => {

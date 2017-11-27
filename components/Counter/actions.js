@@ -9,15 +9,6 @@ export const launchOper = operation => dispatch => {
   })
 };
 
-export const handleAsync = isAsync => dispatch => {
-  dispatch({
-    type: types.HANDLE_ASYNC_COUNTER,
-    isAsync
-  });
-  clearInterval(timer);
-  dispatch({ type: types.TIMER_PAUSE })
-};
-
 export const startAsync = () => dispatch => {
   clearInterval(timer);
   timer = setInterval(() => dispatch(tick()), 1000);

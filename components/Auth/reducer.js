@@ -1,8 +1,13 @@
 import * as types from '../../constants/actionTypes';
 
-export default (state = null, action) => {
+const initialState = {
+  isAuth: false,
+  userData: null
+};
+
+export default (state = initialState, action) => {
   switch (action.type) {
-    case types.ON_CHANGE_STATE_AUTH:
+    case types.AUTH_UPDATE:
       return action.user
     default: return state
   }

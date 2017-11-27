@@ -1,7 +1,6 @@
 import * as types from '../../constants/actionTypes';
 
 const initialState = {
-  isAsync: false,
   asyncStart: false,
   result: 0
 };
@@ -10,8 +9,6 @@ export default (state = initialState, action) => {
   switch (action.type) {
     case types.LAUNCH_OPERATION:
       return Object.assign({}, state, { result: newOperation(state.result, action.operation) })
-    case types.HANDLE_ASYNC_COUNTER:
-      return Object.assign({}, state, { isAsync: action.isAsync })
     case types.TIMER_START:
       return Object.assign({}, state, { asyncStart: true })
     case types.TIMER_TICK:

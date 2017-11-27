@@ -1,0 +1,6 @@
+
+module.exports = {
+  API_KEY_FIREBASE: process.env.API_KEY_FIREBASE,
+  API_ENDPOINT_PRISMIC: process.env.API_ENDPOINT_PRISMIC,
+  API_TOKEN_PRISMIC: process.env.API_TOKEN_PRISMIC
+}
